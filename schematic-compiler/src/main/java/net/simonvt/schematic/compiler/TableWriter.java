@@ -22,21 +22,7 @@ import com.squareup.javapoet.FieldSpec;
 import com.squareup.javapoet.JavaFile;
 import com.squareup.javapoet.MethodSpec;
 import com.squareup.javapoet.TypeSpec;
-import java.io.IOException;
-import java.io.Writer;
-import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.List;
-import javax.annotation.processing.Filer;
-import javax.annotation.processing.ProcessingEnvironment;
-import javax.lang.model.element.Element;
-import javax.lang.model.element.Modifier;
-import javax.lang.model.element.TypeElement;
-import javax.lang.model.element.VariableElement;
-import javax.lang.model.type.MirroredTypeException;
-import javax.lang.model.type.TypeMirror;
-import javax.tools.Diagnostic.Kind;
-import javax.tools.JavaFileObject;
+
 import net.simonvt.schematic.annotation.AutoIncrement;
 import net.simonvt.schematic.annotation.Check;
 import net.simonvt.schematic.annotation.ConflictResolutionType;
@@ -48,6 +34,23 @@ import net.simonvt.schematic.annotation.PrimaryKey;
 import net.simonvt.schematic.annotation.References;
 import net.simonvt.schematic.annotation.Table;
 import net.simonvt.schematic.annotation.Unique;
+
+import java.io.IOException;
+import java.io.Writer;
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.annotation.processing.Filer;
+import javax.annotation.processing.ProcessingEnvironment;
+import javax.lang.model.element.Element;
+import javax.lang.model.element.Modifier;
+import javax.lang.model.element.TypeElement;
+import javax.lang.model.element.VariableElement;
+import javax.lang.model.type.MirroredTypeException;
+import javax.lang.model.type.TypeMirror;
+import javax.tools.Diagnostic.Kind;
+import javax.tools.JavaFileObject;
 
 public class TableWriter {
 
@@ -301,7 +304,7 @@ public class TableWriter {
           break;
 
         case BLOB:
-          // TODO: What do I call here?
+          // : What do I call here?
           break;
       }
     }

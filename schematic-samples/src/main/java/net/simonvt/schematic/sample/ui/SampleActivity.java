@@ -39,6 +39,7 @@ public class SampleActivity extends FragmentActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        // TODO: 8/18/16 1 - add note
         if (savedInstanceState == null) {
             Fragment f = new ListsFragment();
             getSupportFragmentManager() //
@@ -48,6 +49,7 @@ public class SampleActivity extends FragmentActivity
         }
     }
 
+    // TODO: 8/18/16 12b - replace with detail list
     @Override
     public void onListSelected(long listId) {
         Fragment f = ListFragment.newInstance(listId);

@@ -781,7 +781,7 @@ public class ContentProviderWriter {
             .addStatement("final String having = $S", uri.having)
             .addStatement("final String limit = $S", uri.limit);
 
-        // TODO: The whereBuilder part is kind of gross
+        // : The whereBuilder part is kind of gross
         spec.addStatement(
             "$T cursor = builder.table(table)\n$L.query(db, projection, groupBy, having, sortOrder, limit)",
             Clazz.CURSOR, whereBuilder.toString());

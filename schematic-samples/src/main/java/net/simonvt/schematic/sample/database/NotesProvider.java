@@ -73,6 +73,7 @@ public final class NotesProvider {
             return map;
         }
 
+        // TODO: 8/18/16 7 uri of list
         @ContentUri(
                 path = Path.LISTS,
                 type = "vnd.android.cursor.dir/list",

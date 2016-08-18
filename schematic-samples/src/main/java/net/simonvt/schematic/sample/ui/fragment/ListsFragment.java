@@ -29,15 +29,15 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import butterknife.Bind;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-import butterknife.OnItemClick;
-
 import net.simonvt.schematic.sample.R;
 import net.simonvt.schematic.sample.database.NotesProvider.Lists;
 import net.simonvt.schematic.sample.ui.adapter.ListsAdapter;
 import net.simonvt.schematic.sample.ui.dialog.NewListDialog;
+
+import butterknife.Bind;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import butterknife.OnItemClick;
 
 public class ListsFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
 
@@ -60,18 +60,22 @@ public class ListsFragment extends Fragment implements LoaderManager.LoaderCallb
 
     OnListSelectedListener listener;
 
+    // TODO: 8/18/16 2 - add click listener on item in list
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         listener = (OnListSelectedListener) activity;
     }
 
+    // TODO: 8/18/16 3 - inflate view
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_lists, container, false);
     }
 
+
+    // TODO: 8/18/16 5 - set up view, call loader to start
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -90,21 +94,25 @@ public class ListsFragment extends Fragment implements LoaderManager.LoaderCallb
         super.onDestroyView();
     }
 
+    // TODO: 8/18/16 11 - when click button add, show a dialog to add a item into list.
     @OnClick(R.id.addList)
     void addList() {
         new NewListDialog().show(getFragmentManager(), DIALOG_NEW_LIST);
     }
 
+    // TODO: 8/18/16 12 onListSelected
     @OnItemClick(android.R.id.list)
     void onListClicked(long id) {
         listener.onListSelected(id);
     }
 
+    // TODO: 8/18/16 6 -  onCreateLoader return cursor loader that getting data from content provider
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
         return new CursorLoader(getActivity(), Lists.CONTENT_URI, ListsAdapter.PROJECTION, null, null, null);
     }
 
+    // TODO: 8/18/16 9 - when getting data done, set it to listview
     @Override
     public void onLoadFinished(Loader loader, Cursor data) {
         if (adapter == null) {
@@ -115,6 +123,7 @@ public class ListsFragment extends Fragment implements LoaderManager.LoaderCallb
         }
     }
 
+    // TODO: 8/18/16 10 - remove data when reset loader
     @Override
     public void onLoaderReset(Loader loader) {
         if (adapter != null) {

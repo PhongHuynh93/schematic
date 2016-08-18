@@ -24,14 +24,15 @@ import android.view.ViewGroup;
 import android.widget.CursorAdapter;
 import android.widget.TextView;
 
-import butterknife.Bind;
-import butterknife.ButterKnife;
-
 import net.simonvt.schematic.sample.R;
 import net.simonvt.schematic.sample.database.ListColumns;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
 public class ListsAdapter extends CursorAdapter {
 
+    // TODO: 8/18/16 8 the condition when getting data from content provider
     public static final String[] PROJECTION = new String[]{
             ListColumns.ID, ListColumns.TITLE, ListColumns.NOTES,
     };
