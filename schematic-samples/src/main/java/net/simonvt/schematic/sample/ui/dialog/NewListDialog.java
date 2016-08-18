@@ -26,39 +26,44 @@ import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
+
 import net.simonvt.schematic.sample.R;
 import net.simonvt.schematic.sample.database.ListColumns;
 import net.simonvt.schematic.sample.database.NotesProvider.Lists;
 
 public class NewListDialog extends DialogFragment {
 
-  @Override public Dialog onCreateDialog(Bundle savedInstanceState) {
-    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+    @Override
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
-    View v = LayoutInflater.from(builder.getContext()).inflate(R.layout.dialog_new_list, null);
-    final EditText listName = (EditText) v.findViewById(R.id.listName);
+        View v = LayoutInflater.from(builder.getContext()).inflate(R.layout.dialog_new_list, null);
+        final EditText listName = (EditText) v.findViewById(R.id.listName);
 
-    builder.setView(v);
+        builder.setView(v);
 
-    builder.setTitle(R.string.new_list)
-        .setPositiveButton(R.string.create_list, new DialogInterface.OnClickListener() {
-          @Override public void onClick(DialogInterface dialog, int which) {
-            final String name = listName.getText().toString();
-            final Context context = getActivity().getApplicationContext();
-            new Thread(new Runnable() {
-              @Override public void run() {
-                ContentValues cv = new ContentValues();
-                cv.put(ListColumns.TITLE, name);
-                context.getContentResolver().insert(Lists.CONTENT_URI, cv);
-              }
-            }).start();
-          }
-        })
-        .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-          @Override public void onClick(DialogInterface dialog, int which) {
-          }
-        });
+        builder.setTitle(R.string.new_list)
+                .setPositiveButton(R.string.create_list, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        final String name = listName.getText().toString();
+                        final Context context = getActivity().getApplicationContext();
+                        new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                ContentValues cv = new ContentValues();
+                                cv.put(ListColumns.TITLE, name);
+                                context.getContentResolver().insert(Lists.CONTENT_URI, cv);
+                            }
+                        }).start();
+                    }
+                })
+                .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                });
 
-    return builder.create();
-  }
+        return builder.create();
+    }
 }

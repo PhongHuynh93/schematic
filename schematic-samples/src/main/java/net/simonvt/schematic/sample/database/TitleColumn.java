@@ -23,5 +23,7 @@ import static net.simonvt.schematic.annotation.DataType.Type.TEXT;
 
 public interface TitleColumn {
 
-  @DataType(TEXT) @NotNull String TITLE = "title";
+    @DataType(TEXT)
+    @NotNull
+    String TITLE = "title";
 }

@@ -26,40 +26,45 @@ import android.widget.TextView;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+
 import net.simonvt.schematic.sample.R;
 import net.simonvt.schematic.sample.database.ListColumns;
 
 public class ListsAdapter extends CursorAdapter {
 
-  public static final String[] PROJECTION = new String[] {
-      ListColumns.ID, ListColumns.TITLE, ListColumns.NOTES,
-  };
+    public static final String[] PROJECTION = new String[]{
+            ListColumns.ID, ListColumns.TITLE, ListColumns.NOTES,
+    };
 
-  public ListsAdapter(Context context, Cursor c) {
-    super(context, c, 0);
-  }
-
-  @Override public View newView(Context context, Cursor cursor, ViewGroup parent) {
-    View v = LayoutInflater.from(context).inflate(R.layout.row_list, parent, false);
-    v.setTag(new ViewHolder(v));
-    return v;
-  }
-
-  @Override public void bindView(View view, Context context, Cursor cursor) {
-    ViewHolder vh = (ViewHolder) view.getTag();
-    final String title = cursor.getString(cursor.getColumnIndex(ListColumns.TITLE));
-    vh.title.setText(title);
-    final int notes = cursor.getInt(cursor.getColumnIndex(ListColumns.NOTES));
-    vh.notes.setText(context.getString(R.string.x_notes, notes));
-  }
-
-  static class ViewHolder {
-
-    @Bind(R.id.title) TextView title;
-    @Bind(R.id.notes) TextView notes;
-
-    public ViewHolder(View view) {
-      ButterKnife.bind(this, view);
+    public ListsAdapter(Context context, Cursor c) {
+        super(context, c, 0);
     }
-  }
+
+    @Override
+    public View newView(Context context, Cursor cursor, ViewGroup parent) {
+        View v = LayoutInflater.from(context).inflate(R.layout.row_list, parent, false);
+        v.setTag(new ViewHolder(v));
+        return v;
+    }
+
+    @Override
+    public void bindView(View view, Context context, Cursor cursor) {
+        ViewHolder vh = (ViewHolder) view.getTag();
+        final String title = cursor.getString(cursor.getColumnIndex(ListColumns.TITLE));
+        vh.title.setText(title);
+        final int notes = cursor.getInt(cursor.getColumnIndex(ListColumns.NOTES));
+        vh.notes.setText(context.getString(R.string.x_notes, notes));
+    }
+
+    static class ViewHolder {
+
+        @Bind(R.id.title)
+        TextView title;
+        @Bind(R.id.notes)
+        TextView notes;
+
+        public ViewHolder(View view) {
+            ButterKnife.bind(this, view);
+        }
+    }
 }

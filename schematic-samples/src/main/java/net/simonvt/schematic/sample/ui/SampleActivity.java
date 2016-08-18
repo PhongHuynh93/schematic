@@ -19,69 +19,77 @@ package net.simonvt.schematic.sample.ui;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+
 import net.simonvt.schematic.sample.ui.fragment.ListFragment;
 import net.simonvt.schematic.sample.ui.fragment.ListsFragment;
 import net.simonvt.schematic.sample.ui.fragment.NoteFragment;
 
 public class SampleActivity extends FragmentActivity
-    implements ListsFragment.OnListSelectedListener, ListFragment.OnNoteSelectedListener,
-    NoteFragment.NoteListener {
+        implements ListsFragment.OnListSelectedListener, ListFragment.OnNoteSelectedListener,
+        NoteFragment.NoteListener {
 
-  private static final String FRAGMENT_LISTS =
-      "net.simonvt.schematic.samples.ui.SampleActivity.LISTS";
-  private static final String FRAGMENT_LIST =
-      "net.simonvt.schematic.samples.ui.SampleActivity.LIST";
-  private static final String FRAGMENT_NOTE =
-      "net.simonvt.schematic.samples.ui.SampleActivity.NOTE";
+    private static final String FRAGMENT_LISTS =
+            "net.simonvt.schematic.samples.ui.SampleActivity.LISTS";
+    private static final String FRAGMENT_LIST =
+            "net.simonvt.schematic.samples.ui.SampleActivity.LIST";
+    private static final String FRAGMENT_NOTE =
+            "net.simonvt.schematic.samples.ui.SampleActivity.NOTE";
 
-  @Override protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
-    if (savedInstanceState == null) {
-      Fragment f = new ListsFragment();
-      getSupportFragmentManager() //
-          .beginTransaction() //
-          .add(android.R.id.content, f, FRAGMENT_LISTS) //
-          .commit();
+        if (savedInstanceState == null) {
+            Fragment f = new ListsFragment();
+            getSupportFragmentManager() //
+                    .beginTransaction() //
+                    .add(android.R.id.content, f, FRAGMENT_LISTS) //
+                    .commit();
+        }
     }
-  }
 
-  @Override public void onListSelected(long listId) {
-    Fragment f = ListFragment.newInstance(listId);
-    getSupportFragmentManager() //
-        .beginTransaction() //
-        .replace(android.R.id.content, f, FRAGMENT_LIST) //
-        .addToBackStack(null) //
-        .commit();
-  }
+    @Override
+    public void onListSelected(long listId) {
+        Fragment f = ListFragment.newInstance(listId);
+        getSupportFragmentManager() //
+                .beginTransaction() //
+                .replace(android.R.id.content, f, FRAGMENT_LIST) //
+                .addToBackStack(null) //
+                .commit();
+    }
 
-  @Override public void onAddNote(long listId) {
-    Fragment f = NoteFragment.newInstance(listId);
-    getSupportFragmentManager() //
-        .beginTransaction() //
-        .replace(android.R.id.content, f, FRAGMENT_NOTE) //
-        .addToBackStack(null) //
-        .commit();
-  }
+    @Override
+    public void onAddNote(long listId) {
+        Fragment f = NoteFragment.newInstance(listId);
+        getSupportFragmentManager() //
+                .beginTransaction() //
+                .replace(android.R.id.content, f, FRAGMENT_NOTE) //
+                .addToBackStack(null) //
+                .commit();
+    }
 
-  @Override public void onNoteSelected(long listId, long noteId, String note, String status) {
-    Fragment f = NoteFragment.newInstance(listId, noteId, note, status);
-    getSupportFragmentManager() //
-        .beginTransaction() //
-        .replace(android.R.id.content, f, FRAGMENT_NOTE) //
-        .addToBackStack(null) //
-        .commit();
-  }
+    @Override
+    public void onNoteSelected(long listId, long noteId, String note, String status) {
+        Fragment f = NoteFragment.newInstance(listId, noteId, note, status);
+        getSupportFragmentManager() //
+                .beginTransaction() //
+                .replace(android.R.id.content, f, FRAGMENT_NOTE) //
+                .addToBackStack(null) //
+                .commit();
+    }
 
-  @Override public void onListRemoved() {
-    getSupportFragmentManager().popBackStack();
-  }
+    @Override
+    public void onListRemoved() {
+        getSupportFragmentManager().popBackStack();
+    }
 
-  @Override public void onNoteChange() {
-    getSupportFragmentManager().popBackStack();
-  }
+    @Override
+    public void onNoteChange() {
+        getSupportFragmentManager().popBackStack();
+    }
 
-  @Override public void onNoteRemoved() {
-    getSupportFragmentManager().popBackStack();
-  }
+    @Override
+    public void onNoteRemoved() {
+        getSupportFragmentManager().popBackStack();
+    }
 }

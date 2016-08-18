@@ -27,19 +27,25 @@ import static net.simonvt.schematic.annotation.DataType.Type.INTEGER;
 import static net.simonvt.schematic.annotation.DataType.Type.TEXT;
 
 public interface NoteColumns {
-  String STATUS_NEW = "new";
-  String STATUS_COMPLETED = "completed";
+    String STATUS_NEW = "new";
+    String STATUS_COMPLETED = "completed";
 
-  @DataType(INTEGER) @PrimaryKey @AutoIncrement String ID = "_id";
+    @DataType(INTEGER)
+    @PrimaryKey
+    @AutoIncrement
+    String ID = "_id";
 
-  @DataType(INTEGER) @References(table = Tables.LISTS, column = ListColumns.ID) String LIST_ID =
-      "listId";
+    @DataType(INTEGER)
+    @References(table = Tables.LISTS, column = ListColumns.ID)
+    String LIST_ID =
+            "listId";
 
-  @DataType(TEXT) String NOTE = "note";
+    @DataType(TEXT)
+    String NOTE = "note";
 
-  @DataType(TEXT)
-  @Check(NoteColumns.STATUS + " in ('" + NoteColumns.STATUS_NEW + "', '"
-          + NoteColumns.STATUS_COMPLETED + "')")
-  String STATUS = "status";
+    @DataType(TEXT)
+    @Check(NoteColumns.STATUS + " in ('" + NoteColumns.STATUS_NEW + "', '"
+            + NoteColumns.STATUS_COMPLETED + "')")
+    String STATUS = "status";
 
 }

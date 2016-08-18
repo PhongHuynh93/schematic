@@ -26,35 +26,40 @@ import android.widget.TextView;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+
 import net.simonvt.schematic.sample.R;
 import net.simonvt.schematic.sample.database.NoteColumns;
 
 public class ListAdapter extends CursorAdapter {
 
-  public ListAdapter(Context context, Cursor c) {
-    super(context, c, 0);
-  }
-
-  @Override public View newView(Context context, Cursor cursor, ViewGroup parent) {
-    View v = LayoutInflater.from(context).inflate(R.layout.row_note, parent, false);
-    v.setTag(new ViewHolder(v));
-    return v;
-  }
-
-  @Override public void bindView(View view, Context context, Cursor cursor) {
-    ViewHolder vh = (ViewHolder) view.getTag();
-    final String note = cursor.getString(cursor.getColumnIndex(NoteColumns.NOTE));
-    vh.note.setText(note);
-    final String status = cursor.getString(cursor.getColumnIndex(NoteColumns.STATUS));
-    vh.status.setText(status);
-  }
-
-  static class ViewHolder {
-    @Bind(R.id.note) TextView note;
-    @Bind(R.id.statusText) TextView status;
-
-    ViewHolder(View v) {
-      ButterKnife.bind(this, v);
+    public ListAdapter(Context context, Cursor c) {
+        super(context, c, 0);
     }
-  }
+
+    @Override
+    public View newView(Context context, Cursor cursor, ViewGroup parent) {
+        View v = LayoutInflater.from(context).inflate(R.layout.row_note, parent, false);
+        v.setTag(new ViewHolder(v));
+        return v;
+    }
+
+    @Override
+    public void bindView(View view, Context context, Cursor cursor) {
+        ViewHolder vh = (ViewHolder) view.getTag();
+        final String note = cursor.getString(cursor.getColumnIndex(NoteColumns.NOTE));
+        vh.note.setText(note);
+        final String status = cursor.getString(cursor.getColumnIndex(NoteColumns.STATUS));
+        vh.status.setText(status);
+    }
+
+    static class ViewHolder {
+        @Bind(R.id.note)
+        TextView note;
+        @Bind(R.id.statusText)
+        TextView status;
+
+        ViewHolder(View v) {
+            ButterKnife.bind(this, v);
+        }
+    }
 }
